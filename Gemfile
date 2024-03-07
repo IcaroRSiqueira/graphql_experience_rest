@@ -5,9 +5,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.2.3'
 
+gem 'bunny', '>= 2.9.2'
+gem 'json'
 gem 'pg', '1.5.5'
 gem 'puma', '~> 6.0'
 gem 'rails', '7.1.2'
+gem 'redis'
+gem 'sneakers'
 gem 'sprockets-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 

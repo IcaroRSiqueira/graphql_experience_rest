@@ -5,8 +5,12 @@ services:
       - 3001:3001
     depends_on:
       - postgres
+      - rabbitmq
+      - redis
     links:
       - postgres
+      - rabbitmq
+      - redis
     working_dir: /app
     build:
       context: .
@@ -18,3 +22,19 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_USERNAME: "postgres"
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    depends_on:
+      - postgres
+      - redis
+    links:
+      - postgres
+      - redis
+    environment:
+      RABBITMQ_DEFAULT_USER: myuser
+      RABBITMQ_DEFAULT_PASS: mypassword
+  redis:
+    image: redis
