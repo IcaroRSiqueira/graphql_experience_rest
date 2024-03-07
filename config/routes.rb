@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  get 'policies/:policy_id', controller: 'policies', action: 'show'
 end
