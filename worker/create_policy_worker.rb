@@ -7,7 +7,6 @@ class CreatePolicyWorker
     if err["type"] == "error"
       $redis.incr "processor:#{err["error"]}"
     end
-
     ack!
   end
 end
