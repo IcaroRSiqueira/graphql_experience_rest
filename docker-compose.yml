@@ -7,10 +7,8 @@ services:
       - postgres
       - rabbitmq
       - redis
-    links:
-      - postgres
-      - rabbitmq
-      - redis
+    networks:
+      - rabbitmq_network
     working_dir: /app
     build:
       context: .
@@ -23,8 +21,11 @@ services:
     volumes:
       - ./tmp/db:/var/lib/postgresql/data
     environment:
+      POSTGRES_DB: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_USERNAME: "postgres"
+    networks:
+      - rabbitmq_network
   sneakers:
     <<: *api
     ports: []
@@ -38,10 +39,15 @@ services:
     depends_on:
       - postgres
       - redis
-    links:
-      - postgres
-      - redis
+    networks:
+      - rabbitmq_network
     environment:
       RABBITMQ_HOSTNAME: rabbitmq
   redis:
     image: redis
+    networks:
+      - rabbitmq_network
+networks:
+  rabbitmq_network:
+    name: rabbitmq_network
+    external: true
