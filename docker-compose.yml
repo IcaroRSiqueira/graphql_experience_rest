@@ -1,6 +1,6 @@
 version: "3.9"
 services:
-  api_rest:
+  api_rest: &api
     ports:
       - 3001:3001
     depends_on:
@@ -15,6 +15,7 @@ services:
     build:
       context: .
     entrypoint: "sh docker-entrypoint.sh"
+    command: bin/rails s -b 0.0.0.0 -p 3001
     volumes:
       - .:/app
   postgres:
@@ -24,6 +25,11 @@ services:
     environment:
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_USERNAME: "postgres"
+  sneakers:
+    <<: *api
+    ports: []
+    entrypoint: []
+    command: bundle exec rake sneakers:run
   rabbitmq:
     image: rabbitmq:3.9-management
     ports:
@@ -37,7 +43,5 @@ services:
       - redis
     environment:
       RABBITMQ_HOSTNAME: rabbitmq
-      RABBITMQ_DEFAULT_USER: myuser
-      RABBITMQ_DEFAULT_PASS: mypassword
   redis:
     image: redis

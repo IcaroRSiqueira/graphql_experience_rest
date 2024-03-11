@@ -282,7 +282,6 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  bunny (>= 2.9.2)
   debug
   factory_bot_rails
   json
