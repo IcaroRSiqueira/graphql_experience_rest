@@ -26,6 +26,16 @@ services:
       POSTGRES_USERNAME: "postgres"
     networks:
       - rabbitmq_network
+  sidekiq:
+    <<: *api
+    ports: []
+    entrypoint: []
+    environment:
+      NOAUTH: 1
+    links:
+      - redis
+      - postgres
+    command: bundle exec sidekiq -c 1
   sneakers:
     <<: *api
     ports: []

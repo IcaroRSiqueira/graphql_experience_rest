@@ -13,13 +13,13 @@ task :create_message => :environment do
     data_emissao: '08-03-2024',
     data_fim_cobertura: '08-03-2025',
     segurado: {
-      nome: 'Joao Silva',
+      nome: 'Qualquer outro nome',
       cpf: '001.002.003-90'
     },
     veiculo: {
-      marca: 'GM',
-      modelo: 'Opala',
-      ano: '1973',
+      marca: 'Honda',
+      modelo: 'Fit',
+      ano: '2007',
       placa: 'ABC-1234'
     }
 }.to_json

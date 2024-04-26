@@ -1,0 +1,8 @@
+# Options here can still be overridden by cmd line args.
+---
+:verbose: false
+:concurrency: 10
+:queues:
+  - [low,1]
+  - [default,2]
+  - [high,3]
